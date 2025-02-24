@@ -1,0 +1,23 @@
+# Unity generated files
+Temp/
+Library/
+obj/
+Build/
+*.sln
+*.csproj
+*.unityproj
+*.booproj
+*.pidb
+*.suo
+*.userprefs
+*.unitypackage
+*.log
+
+# Visual Studio cache files
+.vs/
+
+# macOS files
+.DS_Store
+
+# Windows thumbnail cache files
+Thumbs.db
