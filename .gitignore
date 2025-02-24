@@ -1,8 +1,14 @@
-# Unity generated files
+# 操作系统生成的文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Unity 生成的文件
 Temp/
 Library/
 obj/
 Build/
+Builds/
 *.sln
 *.csproj
 *.unityproj
@@ -12,12 +18,27 @@ Build/
 *.userprefs
 *.unitypackage
 *.log
-
-# Visual Studio cache files
+*.benchmark
 .vs/
 
-# macOS files
-.DS_Store
+# Visual Studio 缓存文件
+.vs/
 
-# Windows thumbnail cache files
-Thumbs.db
+# Rider 缓存文件
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# MonoDevelop 缓存文件
+.mono/
+
+# 自动生成的 UI 布局文件
+*.prefab.meta
+*.unity.meta
+
+# 自定义忽略文件和文件夹
+# 如果你有自定义的不需要跟踪的文件或文件夹，可以在这里添加
+# 例如：
+# MyCustomFolder/
+# MyCustomFile.txt

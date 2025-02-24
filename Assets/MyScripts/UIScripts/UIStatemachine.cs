@@ -12,15 +12,16 @@ public enum UIState
 public class UIStatemachine : MonoBehaviour
 {
     public GameObject loginCanvans;
-    public GameObject MainCanvans;
-    public GameObject PlayCanvans;
-    public GameObject EndSCanvans;
+    public GameObject mainCanvans;
+    public GameObject playCanvans;
+    public GameObject endSCanvans;
     private UIState currentState;
-    private Dictionary<string,GameObject> panels;
+    private Dictionary<UIState,GameObject> panels;
     // Start is called before the first frame update
     void Start()
     {
-        panels= new Dictionary<string,GameObject>();
+        Init();
+        panels= new Dictionary<UIState,GameObject>();
         currentState=UIState.LoginState;
         UpdateCanvans();
     }
@@ -30,20 +31,56 @@ public class UIStatemachine : MonoBehaviour
     {
         
     }
-    public void InstantiatePanel(string str)
+    private void Init()
     {
-        if (!panels.ContainsKey(str))
+        loginCanvans=Resources.Load<GameObject>("UIPrefabs/LoginPanel");
+        mainCanvans = Resources.Load<GameObject>("UIPrefabs/MainPanel");
+        playCanvans = Resources.Load<GameObject>("UIPrefabs/GamePanel");
+        //endSCanvans = Resources.Load<GameObject>("");
+        
+    }
+    public void InstantiatePanel(UIState s)
+    {
+        if (panels.ContainsKey(s))
         {
-            GameObject temp = new GameObject();
-            
+            return;
         }
+        else
+        {
+            switch (s) 
+            { 
+                case UIState.LoginState:
+                    GameObject temp1 = Instantiate(loginCanvans);
+                    temp1.name =UIState.LoginState.ToString();
+                    panels.Add(s, temp1);
+                    break;
+                case UIState.MainState:
+                    GameObject temp2 = Instantiate(mainCanvans);
+                    temp2.name = UIState.MainState.ToString();
+                    panels.Add(s, temp2);
+                    break;
+                case UIState.PlayState:
+                    GameObject temp3= Instantiate(loginCanvans);
+                    temp3.name = UIState.PlayState.ToString();
+                    panels.Add(s, temp3);
+                    break;
+                //case UIState.EndState:
+                //    GameObject temp4 = Instantiate(endSCanvans);
+                //    temp4.name = UIState.EndState.ToString();
+                //    panels.Add(s, temp4);
+                //    break;
+
+            }
+        }
+        
     }
     public void UpdateCanvans()
     {
-        loginCanvans.SetActive(currentState==UIState.LoginState);
-        MainCanvans.SetActive(currentState==UIState.MainState);
-        PlayCanvans.SetActive(currentState == UIState.PlayState);
-        EndSCanvans.SetActive(currentState==UIState.EndState);
+        if (panels.ContainsKey(currentState)) 
+        { 
+            panels[currentState].SetActive(true);
+        }
+
     }
     public void ChangeState(UIState state)
     {
