@@ -91,11 +91,12 @@ public class LuaManger : Single<LuaManger>
 
         }
     }
-
+    //定时清理
     public void OnTick()
     {
         luaEnv.Tick();
     }
+    //销毁
     public void OnDestroy() 
     { 
         luaEnv.Dispose();

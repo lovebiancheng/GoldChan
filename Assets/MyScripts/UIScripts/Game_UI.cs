@@ -23,36 +23,32 @@ public class Game_UI : Base_UI
     public Text level;
     public Text record;
 
+   
+
     public override void Enter()
     {
         base.Enter();
-    }
-    public override void Exit()
-    {
-        base.Exit();
-    }
-    private void Awake()
-    {
         LuaManger.Instance.Initialize();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         this.Initialize();
         this.LuaInitialize();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public override void Exit()
     {
-        
+        LuaManger.Instance.OnTick();
+        gameObject.SetActive(false);
     }
+    //[LuaCallCSharp]
+    //public void ChangeState()
+    //{
+    //    statemachine.ChangeUIState();
+    //}
     public override void Initialize()
     {
         this.parentTransform = transform;
         leaderboradTransform = parentTransform.Find("Leaderboard").gameObject.transform;
         fetter = parentTransform.Find("Bg1/Fetter").gameObject.GetComponent<Button>();
-        Debug.Log(fetter.name);
+        //Debug.Log(fetter.name);
         equipment = parentTransform.Find("Bg2/Equipment").gameObject.GetComponent<Button>();
         buyExperience = parentTransform.Find("Bg3/BuyExperience").gameObject.GetComponent<Button>();
         buyRole = parentTransform.Find("Bg4/BuyRole").gameObject.GetComponent<Button>();
@@ -68,6 +64,7 @@ public class Game_UI : Base_UI
     public override void LuaInitialize()
     {
         LuaManger.Instance.DoStringLuaScript("GamePanel");
+        //LuaManger.Instance.MyLuaTable.Set("gameUI", this);
         LuaManger.Instance.MyLuaTable.Set("fetterButton",fetter);
         LuaManger.Instance.MyLuaTable.Set("equipmentButton", equipment);
         LuaManger.Instance.MyLuaTable.Set("buyExperienceButton", buyExperience);
@@ -75,6 +72,7 @@ public class Game_UI : Base_UI
         LuaManger.Instance.MyLuaTable.Set("attackDetialButton", attackDetial );
         LuaManger.Instance.MyLuaTable.Set("settingButton", setting );
         LuaManger.Instance.MyLuaTable.Set("squadButton", squad);
+        //LuaManger.Instance.MyLuaTable.Set("uiStatemachine",statemachine);
         LuaManger.Instance.MyLuaTable.Get<LuaFunction>("AddListener").Call();
 
     }

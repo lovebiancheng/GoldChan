@@ -18,33 +18,28 @@ public class Login_UI :Base_UI,IInitialize
 
     public Transform parentTransform;
 
+    public LuaFunction luaFunction1;
+    
+
     public override void Enter()
     {
         base.Enter();
-    }
-    public override void Exit() 
-    { 
-        base.Exit(); 
-    }
-    private void Awake()
-    {
         LuaManger.Instance.Initialize();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         Initialize();
         LuaInitialize();
     }
-    private void OnDestroy()
+    public override void Exit() 
     {
-        LuaManger.Instance.OnDestroy();
-        Debug.Log("Ïú»ÙµÇÂ¼½çÃæ");
+        gameObject.SetActive(false);
+
+        luaFunction1.Dispose();
+        luaFunction1= null;
+        LuaManger.Instance.OnTick();
     }
     public override void Initialize()
     {
         parentTransform = this.transform;
-        Debug.Log(parentTransform.gameObject.name);
+        //Debug.Log(parentTransform.gameObject.name);
         account = parentTransform.Find("Bg/Account").transform.gameObject.GetComponent<InputField>();
         password = parentTransform.Find("Bg/Password").gameObject.GetComponent<InputField>();
         login = parentTransform.Find("Bg/Login").gameObject.GetComponent<Button>();
@@ -57,6 +52,7 @@ public class Login_UI :Base_UI,IInitialize
     public override void LuaInitialize()
     {
         LuaManger.Instance.DoStringLuaScript("LoginPanel");
+        LuaManger.Instance.MyLuaTable.Set("loginUI", this);
         LuaManger.Instance.MyLuaTable.Set("account", account);
         LuaManger.Instance.MyLuaTable.Set("password", password);
         LuaManger.Instance.MyLuaTable.Set("loginButton", login);
@@ -66,10 +62,21 @@ public class Login_UI :Base_UI,IInitialize
         LuaManger.Instance.MyLuaTable.Set("error", error);
         LuaManger.Instance.MyLuaTable.Set("errotText",errorMessage);
         //LuaManger.Instance.MyLuaTable.Set("apDic",Data.Instance.accountDic);
-        LuaManger.Instance.MyLuaTable.Get<LuaFunction>("AddListener").Call();
+        //LuaManger.Instance.MyLuaTable.Set("uiStatemachine", statemachine);
+        luaFunction1 = LuaManger.Instance.MyLuaTable.Get<LuaFunction>("AddListener");
+        luaFunction1.Call();
         
         
     }
-    
-
+    [LuaCallCSharp]
+    public void ChangeUIState()
+    {
+        UIStatemachine.Instance.ChangeState(UIState.MainState);
+        //statemachine.ChangeState();
+    }
+    [LuaCallCSharp]
+    public void ChangeLoginBool()
+    {
+        UIStatemachine.Instance.isLogin = true;
+    }
 }

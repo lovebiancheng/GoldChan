@@ -19,7 +19,10 @@ function OnLoginClick()
 	if CS.Data.Instance.accountDic:ContainsKey(accountText) then
 		local tempText=CS.Data.Instance:FindContentInDic(accountText)
 		if(tempText==passwordText) then
+
 			CS.UnityEngine.Debug.Log("登录成功"..accountText..passwordText)
+			loginUI:ChangeUIState()
+			loginUI:ChangeLoginBool()
 		else
 			error:SetActive(true)
 		    OnErrorMessage("账号已有，密码错误")

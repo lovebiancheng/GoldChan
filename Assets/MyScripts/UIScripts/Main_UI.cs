@@ -11,10 +11,14 @@ public class Main_UI : Base_UI
     public override void Enter()
     {
         base.Enter();
+        LuaManger.Instance.Initialize();
+        this.Initialize();
+        this.LuaInitialize();
     }
     public override void Exit() 
     {
-        base.Exit();
+        gameObject.SetActive(false);
+        LuaManger.Instance.OnTick();
     }
 
     public Button begainGame;
@@ -24,21 +28,19 @@ public class Main_UI : Base_UI
     public Image outside;
     public Image role;
     public Transform parentTransform;
+
+    
+
     //public Text message;
     private void Awake()
     {
-        LuaManger.Instance.Initialize();
+       
     }
     void Start()
     {
-        this.Initialize();
-        this.LuaInitialize();
+        
     }
-    private void OnDestroy()
-    {
-        LuaManger.Instance.OnDestroy();
-        Debug.Log("Ïú»ÙµÇÂ¼½çÃæ");
-    }
+    
     
     public override void Initialize()
     {
@@ -55,15 +57,28 @@ public class Main_UI : Base_UI
     public override void LuaInitialize()
     {
         LuaManger.Instance.DoStringLuaScript("MainPanel");
+        LuaManger.Instance.MyLuaTable.Set("mainUI", this);
         LuaManger.Instance.MyLuaTable.Set("begainGameButton", begainGame);
         LuaManger.Instance.MyLuaTable.Set("settingButton", setting);
         LuaManger.Instance.MyLuaTable.Set("emailButton", email);
         LuaManger.Instance.MyLuaTable.Set("friendButton", friend);
         LuaManger.Instance.MyLuaTable.Set("outsideImage", parentTransform);
         LuaManger.Instance.MyLuaTable.Set("roleImage", role);
+        //LuaManger.Instance.MyLuaTable.Set("uiStatemachine", statemachine);
         //LuaManger.Instance.MyLuaTable.Set("apDic",Data.Instance.accountDic);
         LuaManger.Instance.MyLuaTable.Get<LuaFunction>("AddListener").Call();
 
 
+    }
+   
+
+
+
+    [LuaCallCSharp]
+    public void ChangeUIState()
+    {
+        
+        UIStatemachine.Instance.ChangeState(UIState.WaitState);
+        
     }
 }

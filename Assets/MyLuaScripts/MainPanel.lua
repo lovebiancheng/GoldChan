@@ -15,6 +15,7 @@ end
 function OnBegainClick()
 	--跳转到游戏界面
 	CS.UnityEngine.Debug.Log("打开游戏界面")
+	mainUI:ChangeUIState()
 end
 
 function OnSettingClick()
