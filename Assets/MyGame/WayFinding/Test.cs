@@ -8,7 +8,7 @@ public class Test : MonoBehaviour
     void Start()
     {
         PathFind pathFind=new PathFind(10,10);
-        
+        pathFind.grid[4,4].isWalkAble=false;
         List<Node> path = pathFind.FindPath(0, 0, 9, 9);
         foreach (Node node in path)
         {

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AttackBegain : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //战斗过程中拥有的钱数
+    public int money;
     void Start()
     {
         UIStatemachine.Instance.Init();
