@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 1478091491}
   - component: {fileID: 1478091492}
   - component: {fileID: 1478091493}
+  - component: {fileID: 1478091494}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -404,6 +405,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708c91c456ee05244a0ae33be95a6dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1478091494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478091486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce9dc7baf879a54893eb78ac25f9f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillID: 0
+    skillName: 
+    description: 
+    coolTime: 0
+    coolRemain: 0
+    costSP: 0
+    attackDistance: 0
+    attackAngle: 0
+    attackTargetTags: []
+    attackTarges: []
+    impactType: []
+    nextBatterID: 0
+    atkRation: 0
+    durationTime: 0
+    atkInterval: 0
+    owner: {fileID: 0}
+    skillPrefab: {fileID: 0}
+    animationName: 
+    hitFxName: 
+    hitFxPrefab: 
+    leveal: 0
+    attackType: 0
+    selectorType: 0
 --- !u!1 &1792626569
 GameObject:
   m_ObjectHideFlags: 0
