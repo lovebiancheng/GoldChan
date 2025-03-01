@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/// <summary>
-/// 技能释放器，挂载预制体上
-/// 创建算法（攻击力，伤害生命）
-/// 执行算法
-/// </summary>
-public class SkillCaster : MonoBehaviour
+using UnityEngine.UI;
+
+public class EventScripts : MonoBehaviour
 {
-    //可以组合伤害生命，降低防御力，眩晕，减速类
+    Button gg;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gg.onClick.AddListener(FFF);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void FFF()
+    {
+
     }
 }

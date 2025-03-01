@@ -25,7 +25,7 @@ public class SkilManager : MonoBehaviour
         tempSkill.skillPrefab = prefab;
         tempSkill.owner=gameObject;
     }
-    public void PrepareSkill(int id)
+    public Skill PrepareSkill(int id)
     {
         Skill skill=new Skill();//注这里查找可以用二分查找
         for (int i = 0; i < skills.Length; i++) 
@@ -38,8 +38,12 @@ public class SkilManager : MonoBehaviour
         }
 
         if (skill != null&&skill.coolRemain<=0&&skill.costSP>10) //这里是大于角色身上的剩余法力值
-        { 
-
+        {
+            return skill;
+        }
+        else
+        {
+            return null;
         }
     }
 
