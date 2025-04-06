@@ -25,6 +25,7 @@ public class CreatCube : MonoBehaviour
 
     public float boxDis=1.7f;
 
+    
     public List<Vector3> gridListVector3=new List<Vector3>();
     // Start is called before the first frame update
     void Start()

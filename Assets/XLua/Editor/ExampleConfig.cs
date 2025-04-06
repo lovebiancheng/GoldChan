@@ -276,6 +276,11 @@ public static class ExampleConfig
                 new List<string>(){"System.IO.DirectoryInfo", "CreateSubdirectory", "System.String", "System.Security.AccessControl.DirectorySecurity"},
                 new List<string>(){"System.IO.DirectoryInfo", "Create", "System.Security.AccessControl.DirectorySecurity"},
                 new List<string>(){"UnityEngine.MonoBehaviour", "runInEditMode"},
+
+                //这里是废话忽悠添加的
+                new List<string>() { "UnityEngine.Light", "SetLightDirty" },
+                new List<string>() { "UnityEngine.Light", "shadowRadius" },
+                new List<string>() { "UnityEngine.Light", "shadowAngle" },
             };
 
 #if UNITY_2018_1_OR_NEWER

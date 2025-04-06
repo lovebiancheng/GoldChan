@@ -14,6 +14,7 @@ public class BoardManager : Single<BoardManager>
     {
         // 记录当前被拖拽的棋子对象
         draggedPiece = piece;
+        Debug.Log( draggedPiece.name.ToString());
         // 记录棋子的原始位置
         originalPosition = piece.transform.position;
 
