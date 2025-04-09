@@ -38,7 +38,7 @@ public class CreatCube : MonoBehaviour
                 GameObject temp= Instantiate(gridPrefab,bornVec,Quaternion.identity);
                 temp.name = string.Format("grid({0},{1})", i, j);
                 gridListVector3.Add(temp.transform.position);
-                BoardManager.Instance.boardCells.Add(new GridCell(temp.transform.position));
+                
             }
         }
         for(int j = 0; j < 9; j++)
@@ -46,7 +46,7 @@ public class CreatCube : MonoBehaviour
             Vector3 bornVec = new Vector3(boxAStartVector.x + j * boxDis, boxAStartVector.y, boxAStartVector.z);
             GameObject temp = Instantiate(boxPrefab, bornVec, Quaternion.identity);
             temp.name = string.Format("boxA({0})", j);
-            BoardManager.Instance.benchCells.Add(new GridCell(temp.transform.position));
+            
         }
         for(int m=0; m < yNum; m++)
         {

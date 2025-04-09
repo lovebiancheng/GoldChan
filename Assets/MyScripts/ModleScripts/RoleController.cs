@@ -18,7 +18,8 @@ public class RoleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator= GetComponent<Animator>();
+        
+        animator = GetComponent<Animator>();
         HierarchicalStateMachine statemachine=new HierarchicalStateMachine(animator);
         StateRegistry registry = new StateRegistry();
         registry.RegHieraState(idle, new Idle());

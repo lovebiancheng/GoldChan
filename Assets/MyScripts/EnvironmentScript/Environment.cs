@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironmentStart : MonoBehaviour
+public class Environment : MonoBehaviour
 {
     public GameObject attackGridCellPrefab;
     public GameObject benchGridCellPrefab;
@@ -11,9 +10,7 @@ public class EnvironmentStart : MonoBehaviour
     public GameObject bigPrefab;
     public GameObject smallPrefab;
 
-    public Cell[,] benchGridCells;
-    public Cell[,] attackGridCells;
-    public Cell[,] eggGridCells;
+    
 
     public Vector3 gridStartVector = new Vector3(-5.7f, -12.72f, -8.84f);
     public Vector3 boxAStartVector = new Vector3(-6.8f, -12.365f, -10.63f);
@@ -45,9 +42,7 @@ public class EnvironmentStart : MonoBehaviour
     void Start()
     {
 
-        benchGridCells = new Cell[boxXNum, boxYNum];
-        attackGridCells = new Cell[xNum, yNum];
-        eggGridCells = new Cell[eggXNum, eggYNum];
+        
         CreatAttackGrid();
         CreatBenchGrid();
         CreatPedestal();
@@ -56,7 +51,7 @@ public class EnvironmentStart : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void CreatAttackGrid()
@@ -66,8 +61,9 @@ public class EnvironmentStart : MonoBehaviour
             for (int j = 0; j < xNum; j++)
             {
                 bornVector = new Vector3(gridStartVector.x + j * xDis, gridStartVector.y, gridStartVector.z + i * yDis);
-                attackGridCells[j, i] = new Cell(bornVector);
                 bornGameobject = Instantiate(attackGridCellPrefab, bornVector, Quaternion.identity);
+                bornGameobject.AddComponent<Cell>();
+                bornGameobject.GetComponent<Cell>().Init(bornVector,j, i,true);
                 bornGameobject.name = string.Format("grid({0},{1})", i, j);
                 //BoardManager.Instance.boardCells.Add(new GridCell(bornGameobject.transform.position));
             }
@@ -75,45 +71,49 @@ public class EnvironmentStart : MonoBehaviour
     }
     public void CreatBenchGrid()
     {
-        for(int i = 0;i < boxXNum; i++)
+        for (int i = 0; i < boxXNum; i++)
         {
             bornVector = new Vector3(boxAStartVector.x + i * boxDis, boxAStartVector.y, boxAStartVector.z);
-            benchGridCells[i,0] = new Cell(bornVector);
+            
+
+
             bornGameobject = Instantiate(benchGridCellPrefab, bornVector, Quaternion.identity);
+            bornGameobject.AddComponent <Cell>();
+            bornGameobject.GetComponent<Cell>().Init(bornVector,i, 0,false);
             bornGameobject.name = string.Format("boxA({0})", i);
         }
-        for(int j = 0; j < boxXNum; j++)
+        for (int j = 0; j < boxXNum; j++)
         {
-            bornVector =new Vector3(boxBStartVector.x - j * boxDis, boxBStartVector.y, boxBStartVector.z);
-            benchGridCells[j, 1] = new Cell(bornVector);
+            bornVector = new Vector3(boxBStartVector.x - j * boxDis, boxBStartVector.y, boxBStartVector.z);
             bornGameobject = Instantiate(benchGridCellPrefab, bornVector, Quaternion.identity);
+            bornGameobject.AddComponent<Cell>();
+            bornGameobject.GetComponent<Cell>().Init(bornVector, j, 1,false);
             bornGameobject.name = string.Format("boxB({0})", j);
         }
     }
     public void CreatPedestal()
     {
-        for(int i = 0; i < eggXNum; i++)
+        for (int i = 0; i < eggXNum; i++)
         {
-            bornVector = new Vector3(smallStartVector1.x,smallStartVector1.y,smallStartVector1.z+i*smallDis);
-            eggGridCells[i,0]=new Cell(bornVector);
+            bornVector = new Vector3(smallStartVector1.x, smallStartVector1.y, smallStartVector1.z + i * smallDis);
             bornGameobject = Instantiate(smallPrefab, bornVector, Quaternion.identity);
+            bornGameobject.AddComponent<Cell>();
+            bornGameobject.GetComponent<Cell>().Init(bornVector, i, 0, false);
             bornGameobject.name = string.Format("pedestal({0})", i);
         }
-        for (int j = 0;j < eggXNum; j++)
+        for (int j = 0; j < eggXNum; j++)
         {
-            bornVector = new Vector3(smallStartVector2.x, smallStartVector2.y, smallStartVector2.z -j * smallDis);
-            eggGridCells[j, 1] = new Cell(bornVector);
+            bornVector = new Vector3(smallStartVector2.x, smallStartVector2.y, smallStartVector2.z - j * smallDis);
             bornGameobject = Instantiate(smallPrefab, bornVector, Quaternion.identity);
+            bornGameobject.AddComponent<Cell>();
+            bornGameobject.GetComponent<Cell>().Init(bornVector, j, 1,false);
             bornGameobject.name = string.Format("pedestal({0})", j);
         }
-        
+
     }
     public void CreatBornpoint()
     {
         Instantiate(bigPrefab, bigStartVector1, Quaternion.identity);
         Instantiate(bigPrefab, bigStartVector2, Quaternion.identity);
     }
-
-
-
 }
